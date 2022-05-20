@@ -20,13 +20,19 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('summernote/', include('django_summernote.urls')),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    # path('hitcount/', include('hitcount.urls', namespace='hitcount')),
+    path('',include('main.urls', namespace='main')),
+    path('property/',include('property.urls', namespace='property')),
+    path('about/',include('about.urls', namespace='about')),
+    path('blog/',include('blog.urls', namespace='blog')),
+    path('users/',include('users.urls', namespace='users')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('summernote/', include('django_summernote.urls')),
     
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG :
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # handler404 = 'main.views.erorr404'
 # handler500 = 'main.views.erorr500'

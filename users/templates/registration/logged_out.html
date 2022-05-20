@@ -1,0 +1,11 @@
+{% extends 'registration/nav_foo.html' %}
+{% block nav_foo %}
+<div class="logout">
+  <div class="container">
+    <p>Logged out!</p>
+    <a href="{% url 'login'%}">Click here to login again.</a>
+    <br>
+    <a style="background-color:#21252900; color:rgb(42, 92, 255);" href="{% url 'website:home' %}">Home</a>
+  </div>
+</div>
+{% endblock nav_foo %}
