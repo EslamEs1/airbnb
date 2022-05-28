@@ -1,3 +1,6 @@
-
+from main.models import Website
 def core_processors(request):
-    pass
+    website = Website.objects.last()
+    return {
+        "website": website
+        }

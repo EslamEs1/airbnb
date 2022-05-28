@@ -93,8 +93,8 @@ class PropertyReview(models.Model):
 PEOPLE_TYPE = (
     (1,1),
     (2,2),
-    (2,2),
-    (2,2)
+    (3,3),
+    (4,4)
 )
 
 # Create Property Booking
@@ -103,7 +103,8 @@ class PropertyBook (models.Model):
     property = models.ForeignKey(Property, related_name='book_property', on_delete=models.CASCADE)
     start_date = models.DateField(default=timezone.now,verbose_name='Start Date')
     end_date = models.DateField(default=timezone.now,verbose_name='Start Date')
-    count = models.IntegerField(default=0, choices=PEOPLE_TYPE, verbose_name='Count')
+    guest = models.IntegerField(default=1 , choices=PEOPLE_TYPE)
+    children = models.IntegerField(default=0 , choices=PEOPLE_TYPE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     #Metadata
@@ -111,4 +112,4 @@ class PropertyBook (models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return self.property
+        return str(self.property)

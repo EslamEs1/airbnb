@@ -1,4 +1,5 @@
-from .models import Property
+from django import forms
+from .models import Property,PropertyBook
 import django_filters
 
 class PropertyFilter(django_filters.FilterSet):
@@ -8,3 +9,14 @@ class PropertyFilter(django_filters.FilterSet):
     class Meta:
         model = Property
         fields = ['title','description','price','place', 'category']
+
+
+
+
+class PropertyBookForm(forms.ModelForm):
+    start_date = forms.DateField(widget= forms.DateInput(attrs={'id':'checkin_date'}))
+    end_date = forms.DateField(widget= forms.DateInput(attrs={'id':'checkin_date'}))
+   
+    class Meta:
+        model = PropertyBook
+        fields = ['start_date','end_date','guest','children']

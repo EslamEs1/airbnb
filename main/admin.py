@@ -12,4 +12,9 @@ class Settings(admin.ModelAdmin):
         
 @admin.register(Contact)
 class Contact(admin.ModelAdmin):
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
     list_display = ('name', 'email')
