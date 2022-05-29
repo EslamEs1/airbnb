@@ -1,19 +1,38 @@
 from django.shortcuts import render,redirect
+from matplotlib import category
 from property.models import Property, Place
+from blog.models import Post
 from .models import Website
 from django.db.models import Count, Q
 from django.core.mail import send_mail
 from .forms import ContactForm
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
-    property_list = Property.objects.all()
-    place = Place.objects.all()
+    property_list = Property.objects.all()[0:10]
+    restaurants_list = Property.objects.filter(
+        category__title='Restaurants')[0:4]
+    popular_list = Property.objects.filter(
+        category__title__in=['Hotel', 'villa', 'House']).order_by('?')[0:5]
+    place = Place.objects.all().annotate(counts=Count('property_place'))
+    post = Post.objects.all()[0:4]
+
+    property_count = Property.objects.all().count()
+    place_count = Place.objects.all().count()
+    Post_count = Post.objects.all().count()
+    users_count = User.objects.all().count()
     return render(request, 'index.html', {
         'property_list': property_list,
         'place': place,
+        'property_count': property_count,
+        'place_count': place_count,
+        'users_count': users_count,
+        'Post_count':Post_count,
+        'Popular_list': popular_list,
+        'restaurants_list':restaurants_list,
+        'post':post,
     })
 
 

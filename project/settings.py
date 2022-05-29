@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'property',
     'about',
     'blog',
-    'users',
     "bootstrap4",
     'django_summernote',
     'taggit',
@@ -148,9 +148,9 @@ SUMMERNOTE_CONFIG = {
         'height': '400', 
     }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'mekky.web22@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Sda49fs4Zs4'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = '587'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mekky.web22@gmail.com'
+EMAIL_HOST_PASSWORD = 'Sda49fs4Zs4'
+EMAIL_USE_TLS = True
+EMAIL_PORT = '587'

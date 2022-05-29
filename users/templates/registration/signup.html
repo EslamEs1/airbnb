@@ -1,6 +1,6 @@
 {% extends 'registration/nav_foo.html' %}
 {% block nav_foo %}
-{% load bootstrap5 %}
+{% load bootstrap4 %}
 <div class="Login">
   <div class="container">
     <h1>Sing up</h1>
@@ -14,7 +14,7 @@
       {% endbuttons %}
     </form>
     <div class="links">
-      <a href="#">Login</a>
+      <a href="{% url 'login' %}">Login</a>
     </div>
 
   </div>

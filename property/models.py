@@ -48,6 +48,7 @@ class PropertyImage(models.Model):
 
 # Create Property Place
 class Place (models.Model):
+    image = models.ImageField(upload_to='Place/images/')
     title = models.CharField(max_length=30, verbose_name='Title')
 
     #Metadata
