@@ -10,7 +10,7 @@ class Property (models.Model):
     owner = models.ForeignKey(User, related_name='property_owner', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='property/images/')
     title = models.CharField(max_length=30, verbose_name='Title', unique=True)
-    description = models.TextField(max_length=5000, verbose_name='Text')
+    description = models.TextField(max_length=10000, verbose_name='Text')
     price = models.DecimalField(max_digits=19,decimal_places=2, verbose_name='Price')
     place = models.ForeignKey('Place',related_name='property_place', on_delete=models.CASCADE)
     category = models.ForeignKey('Category',related_name='property_category', on_delete=models.CASCADE)

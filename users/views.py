@@ -3,8 +3,8 @@ from django.shortcuts import redirect, render
 from .forms import SignupForm, UserForm, ProfileForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.views.generic import DetailView
 from .models import Profile
+from property.models import PropertyBook, Property
 
 class SignupUserForm(CreateView):
     form_class = SignupForm
@@ -15,7 +15,7 @@ class SignupUserForm(CreateView):
 
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-    return render(request, 'registration/profile.html', {'profile': profile})
+    return render(request, 'profile/profile.html', {'profile': profile})
     
 
 
@@ -30,7 +30,22 @@ def edit_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'registration/edit_profile.html', {
+    return render(request, 'profile/edit_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
+    })
+
+
+
+def user_reservations(request):
+    user_reservations = PropertyBook.objects.filter(users=request.user)
+    return render(request, 'profile/reservation.html',{
+        'user_reservations': user_reservations
+    })
+
+
+def user_listing(request):
+    user_listing = Property.objects.filter(owner=request.user)
+    return render(request, 'profile/my_listing.html',{
+        'user_listing': user_listing
     })

@@ -148,8 +148,9 @@ SUMMERNOTE_CONFIG = {
         'height': '400', 
     }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
+# SERVER_EMAIL = 'abc@domain.com'
 EMAIL_HOST_USER = 'mekky.web22@gmail.com'
 EMAIL_HOST_PASSWORD = 'Sda49fs4Zs4'
 EMAIL_USE_TLS = True

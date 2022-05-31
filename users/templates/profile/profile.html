@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" type="text/css">
+<div class="hero-wrap js-fullheight" style="background-image: url({% static 'images/bg_4.jpg' %})">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+      data-scrollax-parent="true">
+      <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+          <span class="mr-2"><a href="/">Home</a></span>
+          <span>Profile</span>
+        </p>
+        <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+         Profile
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="profile">
+  <div class="container">
+    <div class="box">
+      <div class="profile_img">
+        {% if profile.image %}
+        <img src="{{profile.image.url}}" alt="profile_img" />
+        {% else %}
+        <img src="{% static 'img/eslam.jpg' %}" alt="profile_img" />
+        {% endif %}
+      </div>
+      <div class="profile_info">
+        <h1>{{profile.user.username}}</h1>
+        <p><i class="fa-solid fa-address-card"></i> {{profile.about_text}}</p>
+        <p><i class="fa-solid fa-paper-plane"></i> {{profile.user.email}}</p>
+        <p><i class="fa-solid fa-mobile-screen-button"></i> +{{profile.phone}}</p>
+        <p><i class="fa-solid fa-location-dot"></i> {{profile.address}}</p>
+        <a class="btn btn-primary" href="{% url 'users:user_reservations' %}">Reservation</a>
+        <a class="btn btn-primary" href="{% url 'users:user_listing' %}">My Listing</a>
+      </div>
+      <div class="user">
+        <a href="{% url 'users:edit_profile' %}"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="{% url 'password_change' %}"><i class="fa-solid fa-lock"></i></a>
+        <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock base %}

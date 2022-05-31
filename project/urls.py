@@ -19,13 +19,13 @@ from django.contrib import admin
 from django.urls import path,include
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('',include('users.urls', namespace='users')),
     path('admin/', admin.site.urls),
     path('',include('main.urls', namespace='main')),
     path('property/',include('property.urls', namespace='property')),
     path('about/',include('about.urls', namespace='about')),
     path('blog/',include('blog.urls', namespace='blog')),
-    path('',include('users.urls', namespace='users')),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('summernote/', include('django_summernote.urls')),
     
 ]
