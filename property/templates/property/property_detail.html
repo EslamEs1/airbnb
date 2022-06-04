@@ -22,9 +22,7 @@
 
 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
-
 		<div class="row">
-
 			<div class="col-lg-9">
 				<div class="row">
 					<div class="col-md-12 ftco-animate">
@@ -47,7 +45,7 @@
 									<i class="icon-star"></i>
 									<i class="icon-star"></i>
 									<i class="icon-star-o"></i>
-									8 Rating</span>
+									{{object.check_rating}} Rating</span>
 							</p>
 							<p>{{object.description|safe}}</p>
 						</div>
@@ -72,7 +70,7 @@
 														<i class="icon-star"></i>
 														<i class="icon-star"></i>
 														<i class="icon-star-o"></i>
-														<span>8 Rating</span>
+														<span>{{property_place.check_rating}}</span>
 													</p>
 												</div>
 												<div class="two">
@@ -94,6 +92,7 @@
 							</div>
 						</div>
 						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+                            {% if object.check_availability == 'Available' %}
 							<h4 class="mb-5">Check Availability &amp; Booking</h4>
 							{% if messages %}
 							<ul class="messages">
@@ -112,6 +111,9 @@
 								</div>
 								{% endbuttons %}
 							</form>
+                            {% else %}
+                                <h4 style="color:red;" class="mb-5">Sorry, this property {{object.check_availability}}</h4>
+                            {% endif %}
 						</div>
 						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
 							<h4 class="mb-4">Review &amp; Ratings</h4>
@@ -189,7 +191,7 @@
 														<i class="icon-star"></i>
 														<i class="icon-star"></i>
 														<i class="icon-star-o"></i>
-														<span>8 Rating</span>
+														<span>{{property_category.check_rating}} Rating</span>
 													</p>
 												</div>
 												<div class="two">

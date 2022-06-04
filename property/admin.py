@@ -13,11 +13,14 @@ class PropertyAdmin(SummernoteModelAdmin,admin.ModelAdmin):  # instead of ModelA
         Fk_img_product,
     ]
     search_fields = ['title']
+    list_display = ['title', 'check_availability', 'check_rating']
     
 
+@admin.register(PropertyBook)
+class PropertyBookAdmin(admin.ModelAdmin):
+    list_display = ['property', 'in_progress']
 
 admin.site.register(Place)
 admin.site.register(Category)
 admin.site.register(PropertyReview)
-admin.site.register(PropertyBook)
 

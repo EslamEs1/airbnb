@@ -14,7 +14,8 @@ class Property (models.Model):
     price = models.DecimalField(max_digits=19,decimal_places=2, verbose_name='Price')
     place = models.ForeignKey('Place',related_name='property_place', on_delete=models.CASCADE)
     category = models.ForeignKey('Category',related_name='property_category', on_delete=models.CASCADE)
-    slug = models.SlugField(blank=True, null=True, editable=False)
+    slug = models.SlugField(blank=True, null=True,
+                            editable=False, allow_unicode=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -26,9 +27,29 @@ class Property (models.Model):
         return reverse('property:property_detail' , args={self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.title, allow_unicode=True)
         super(Property, self).save(*args, **kwargs)
-    
+
+    def check_availability(self):
+        Availability = self.book_property.all()
+        now = timezone.now().date()
+        for reservation in Availability:
+            if now > reservation.end_date:
+                return 'Available'
+                
+            elif now > reservation.start_date and now < reservation.end_date:
+                time = reservation.end_date
+                return f'Not Available To ({time})'
+        else:
+            return 'Available'
+
+    def check_rating(self):
+        ratings = self.property_reviews.all()
+        if ratings:
+            return round(sum(r.rating for r in ratings) / len(ratings),2)
+        else:
+            return 0
+
     def __str__(self):
         return self.title
 
@@ -103,14 +124,19 @@ class PropertyBook (models.Model):
     users = models.ForeignKey(User, related_name='book_user', on_delete=models.CASCADE)
     property = models.ForeignKey(Property, related_name='book_property', on_delete=models.CASCADE)
     start_date = models.DateField(default=timezone.now,verbose_name='Start Date')
-    end_date = models.DateField(default=timezone.now,verbose_name='Start Date')
+    end_date = models.DateField(default=timezone.now,verbose_name='End Date')
     guest = models.IntegerField(default=1 , choices=PEOPLE_TYPE)
     children = models.IntegerField(default=0 , choices=PEOPLE_TYPE)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    #Metadata
     class Meta :
         ordering = ['-id']
+
+    def in_progress(self):
+        now = timezone.now().date()
+        return now > self.start_date and now < self.end_date
+
+    in_progress.boolean = True
 
     def __str__(self):
         return str(self.property)

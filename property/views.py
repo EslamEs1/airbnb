@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
-from django.views.generic import DetailView 
+from django.views.generic import DetailView ,CreateView
 from .models import Property, PropertyImage
 from .forms import PropertyFilter,PropertyBookForm
 from django.views.generic.edit import FormMixin
@@ -38,4 +38,19 @@ class PropertyDetail(FormMixin,DetailView):
             myform.save()
             messages.success(request, 'Your Reservation Confirmed ')
             return redirect(reverse('property:property_detail' , kwargs={'slug':self.get_object().slug}))
+
+
+
+class AddListing(CreateView):
+    model = Property
+    fields = ['image', 'title', 'description','price', 'place', 'category']
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.owner = request.user
+            myform.save()
+            messages.success(request, 'Your Listing Added Successfully')
+            return redirect(reverse('property:property_list'))
 
