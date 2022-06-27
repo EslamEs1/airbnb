@@ -31,6 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
+
     'users',
     'jazzmin',
     'django.contrib.admin',
@@ -47,7 +52,20 @@ INSTALLED_APPS = [
     'django_summernote',
     'taggit',
     'django_filters',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
 ]
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
