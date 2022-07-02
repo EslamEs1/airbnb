@@ -4,218 +4,230 @@
 {% block base %}
 
 <div class="hero-wrap js-fullheight" style="background-image: url({% static 'images/bg_5.jpg' %});">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
-			data-scrollax-parent="true">
-			<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-						class="mr-2"><a href="/">Home</a></span> <span class="mr-2"><a
-							href="{% url 'property:property_list'%}">Hotel</a></span> <span>Hotel
-						Single</span></p>
-				<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels Details
-				</h1>
-			</div>
-		</div>
-	</div>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
+                        class="mr-2"><a href="/">Home</a></span> <span class="mr-2"><a
+                            href="{% url 'property:property_list'%}">Hotel</a></span> <span>Hotel
+                        Single</span></p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels Details
+                </h1>
+            </div>
+        </div>
+    </div>
 </div>
 
 <section class="ftco-section ftco-degree-bg">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-9">
-				<div class="row">
-					<div class="col-md-12 ftco-animate">
-						<div class="single-slider owl-carousel">
-							{% for property_image in property_image %}
-							<div class="item">
-								<div class="hotel-img" style="background-image: url({{property_image.image.url}});">
-								</div>
-							</div>
-							{% endfor %}
-						</div>
-						<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-							<span>Our Best hotels &amp; Rooms</span>
-							<h2>{{object}}</h2>
-							<p class="rate mb-5">
-								<span class="loc"><a href="#"><i class="icon-map"></i>{{object.place}}</a></span>
-								<span class="star">
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star-o"></i>
-									{{object.check_rating}} Rating</span>
-							</p>
-							<p>{{object.description|safe}}</p>
-						</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-md-12 ftco-animate">
+                        <div class="single-slider owl-carousel">
+                            {% for property_image in property_image %}
+                            <div class="item">
+                                <div class="hotel-img" style="background-image: url({{property_image.image.url}});">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
+                            <span>Our Best hotels &amp; Rooms</span>
+                            <h2>{{object}}</h2>
+                            <p class="rate mb-5">
+                                <span class="loc"><a href="#"><i class="icon-map"></i>{{object.place}}</a></span>
+                                <span class="star">
+                                    <i class="icon-star{% if object.check_rating >= 1 %}{% else %}-o {% endif %}"></i>
+                                    <i class="icon-star{% if object.check_rating >= 2 %}{% else %}-o {% endif %}"></i>
+                                    <i class="icon-star{% if object.check_rating >= 3 %}{% else %}-o {% endif %}"></i>
+                                    <i class="icon-star{% if object.check_rating >= 4 %}{% else %}-o {% endif %}"></i>
+                                    <i class="icon-star{% if object.check_rating >= 5 %}{% else %}-o {% endif %}"></i>
+                                    {{object.check_rating}} Rating</span>
+                            </p>
+                            <p>{{object.description|safe}}</p>
+                        </div>
 
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-4">Related Hotels</h4>
-							<div class="row">
-								{% for property_place in property_place %}
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="{{property_place.get_absolute_url}}" class="img img-2"
-											style="background-image: url({{property_place.image.url}});"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3><a
-															href="{{property_place.get_absolute_url}}">{{property_place.title}}</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star-o"></i>
-														<span>{{property_place.check_rating}}</span>
-													</p>
-												</div>
-												<div class="two">
-													<span
-														class="price per-price">${{property_place.price}}<br><small>/night</small></span>
-												</div>
-											</div>
-											<p>{{property_place.description|truncatewords_html:10|safe}}</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> {{property_place.place}}</span>
-												<span class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								{% endfor %}
+                        <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+                            <h4 class="mb-4">Related Hotels</h4>
+                            <div class="row">
+                                {% for property_place in property_place %}
+                                <div class="col-md-4">
+                                    <div class="destination">
+                                        <a href="{{property_place.get_absolute_url}}" class="img img-2"
+                                            style="background-image: url({{property_place.image.url}});"></a>
+                                        <div class="text p-3">
+                                            <div class="d-flex">
+                                                <div class="one">
+                                                    <h3><a
+                                                            href="{{property_place.get_absolute_url}}">{{property_place.title}}</a>
+                                                    </h3>
+                                                    <p class="rate">
+                                                        <i class="icon-star{% if property_place.check_rating >= 1 %}{% else %}-o{% endif %}"></i>
+                                                        <i class="icon-star{% if property_place.check_rating >= 2 %}{% else %}-o{% endif %}"></i>
+                                                        <i class="icon-star{% if property_place.check_rating >= 3 %}{% else %}-o{% endif %}"></i>
+                                                        <i class="icon-star{% if property_place.check_rating >= 4 %}{% else %}-o{% endif %}"></i>
+                                                        <i class="icon-star{% if property_place.check_rating >= 5 %}{% else %}-o{% endif %}"></i>
+                                                        <span>{{property_place.check_rating}}</span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                <div class="two">
+                                                    <span
+                                                        class="price per-price">${{property_place.price}}<br><small>/night</small></span>
+                                                </div>
+                                            </div>
+                                            <p>{{property_place.description|truncatewords_html:10|safe}}</p>
+                                            <hr>
+                                            <p class="bottom-area d-flex">
+                                                <span><i class="icon-map-o"></i> {{property_place.place}}</span>
+                                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
 
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+                            </div>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                        <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
                             {% if object.check_availability == 'Available' %}
-							<h4 class="mb-5">Check Availability &amp; Booking</h4>
-							{% if messages %}
-							<ul class="messages">
-								{% for message in messages %}
-								<li style="color:green;" {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-									{{ message }}</li>
-								{% endfor %}
-							</ul>
-							{% endif %}
-							<form method=POST>
-								{% csrf_token %}
-								{% bootstrap_form form %}
-								{% buttons %}
-								<div class="form-group">
-									<input type="submit" value="Check Availability" class="btn btn-primary py-3">
-								</div>
-								{% endbuttons %}
-							</form>
-                            {% else %}
-                                <h4 style="color:red;" class="mb-5">Sorry, this property {{object.check_availability}}</h4>
+                            <h4 class="mb-5">Check Availability &amp; Booking</h4>
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li style="color:green;" {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {{ message }}</li>
+                                {% endfor %}
+                            </ul>
                             {% endif %}
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-4">Review &amp; Ratings</h4>
-							<div class="row">
-								<div class="col-md-6">
-									<form method="post" class="star-rating">
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star"></i> 100
-														Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star-o"></i> 30
-														Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star"></i><i
-															class="icon-star-o"></i><i class="icon-star-o"></i> 5
-														Ratings</span></p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i
-															class="icon-star"></i><i class="icon-star-o"></i><i
-															class="icon-star-o"></i><i class="icon-star-o"></i> 0
-														Ratings</span></p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i
-															class="icon-star-o"></i><i class="icon-star-o"></i><i
-															class="icon-star-o"></i><i class="icon-star-o"></i> 0
-														Ratings</span></p>
-											</label>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
-							<h4 class="mb-4">Our Hotels</h4>
-							<div class="row">
-								{% for property_category in property_category %}
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="{{property_category.get_absolute_url}}" class="img img-2"
-											style="background-image: url({{property_category.image.url}});"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3><a
-															href="{{property_category.get_absolute_url}}">{{property_category}}</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star"></i>
-														<i class="icon-star-o"></i>
-														<span>{{property_category.check_rating}} Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span
-														class="price per-price">${{property_category.price}}<br><small>/night</small></span>
-												</div>
-											</div>
-											<p>{{property_category.description|truncatewords_html:10|safe}}</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> {{property_category.place}}</span>
-												<span class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								{% endfor %}
+                            <form method=POST>
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                {% buttons %}
+                                <div class="form-group">
+                                    <input type="submit" value="Check Availability" class="btn btn-primary py-3">
+                                </div>
+                                {% endbuttons %}
+                            </form>
+                            {% else %}
+                            <h4 style="color:red;" class="mb-5">Sorry, this property {{object.check_availability}}</h4>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+                            <h4 class="mb-4">Review &amp; Ratings</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form action="{% url 'property:property_review' object.slug %}" method="get" class="star-rating">
+                                        {% csrf_token %}
+                                        <div class="form-check">
+                                            <input type="radio" name="star" value="5" class="form-check-input"
+                                                id="exampleCheck5">
+                                            <label class="form-check-label" for="exampleCheck5">
+                                                <p class="rate"><span><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star"></i> 5
+                                                        Ratings</span>
+                                                </p>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="star" value="4" class="form-check-input"
+                                                id="exampleCheck4">
+                                            <label class="form-check-label" for="exampleCheck4">
+                                                <p class="rate"><span><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star-o"></i> 4
+                                                        Ratings</span>
+                                                </p>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="star" value="3" class="form-check-input"
+                                                id="exampleCheck3">
+                                            <label class="form-check-label" for="exampleCheck3">
+                                                <p class="rate"><span><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star"></i><i
+                                                            class="icon-star-o"></i><i class="icon-star-o"></i> 3
+                                                        Ratings</span></p>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="star" value="2" class="form-check-input"
+                                                id="exampleCheck2">
+                                            <label class="form-check-label" for="exampleCheck2">
+                                                <p class="rate"><span><i class="icon-star"></i><i
+                                                            class="icon-star"></i><i class="icon-star-o"></i><i
+                                                            class="icon-star-o"></i><i class="icon-star-o"></i> 2
+                                                        Ratings</span></p>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="star" value="1" class="form-check-input"
+                                                id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">
+                                                <p class="rate"><span><i class="icon-star"></i><i
+                                                            class="icon-star-o"></i><i class="icon-star-o"></i><i
+                                                            class="icon-star-o"></i><i class="icon-star-o"></i> 1
+                                                        Ratings</span></p>
+                                            </label>
+                                        </div>
+                                        <input class="btn btn-danger" type="submit" value="Add">
+                                    </form>
+                                </div>
+                                {% else %}
+                                <h2 style="color:red;">Please Login For Add Create Booking And Rating</h2>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
+                            <h4 class="mb-4">Our Hotels</h4>
+                            <div class="row">
+                                {% for property_category in property_category %}
+                                <div class="col-md-4">
+                                    <div class="destination">
+                                        <a href="{{property_category.get_absolute_url}}" class="img img-2"
+                                            style="background-image: url({{property_category.image.url}});"></a>
+                                        <div class="text p-3">
+                                            <div class="d-flex">
+                                                <div class="one">
+                                                    <h3><a
+                                                            href="{{property_category.get_absolute_url}}">{{property_category}}</a>
+                                                    </h3>
+                                                    <p class="rate">
+                                                        <i class="icon-star{% if property_category.check_rating >= 1 %}{% else %}-o {% endif %}"></i>
+                                                        <i class="icon-star{% if property_category.check_rating >= 2 %}{% else %}-o {% endif %}"></i>
+                                                        <i class="icon-star{% if property_category.check_rating >= 3 %}{% else %}-o {% endif %}"></i>
+                                                        <i class="icon-star{% if property_category.check_rating >= 4 %}{% else %}-o {% endif %}"></i>
+                                                        <i class="icon-star{% if property_category.check_rating >= 5 %}{% else %}-o {% endif %}"></i>
+                                                        <span>{{property_category.check_rating}} Rating</span>
+                                                    </p>
+                                                </div>
+                                                <div class="two">
+                                                    <span
+                                                        class="price per-price">${{property_category.price}}<br><small>/night</small></span>
+                                                </div>
+                                            </div>
+                                            <p>{{property_category.description|truncatewords_html:10|safe}}</p>
+                                            <hr>
+                                            <p class="bottom-area d-flex">
+                                                <span><i class="icon-map-o"></i> {{property_category.place}}</span>
+                                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
 
-							</div>
-						</div>
+                            </div>
+                        </div>
 
-					</div>
-				</div> <!-- .col-md-8 -->
-			</div>
-		</div>
+                    </div>
+                </div> <!-- .col-md-8 -->
+            </div>
+        </div>
 </section> <!-- .section -->
 {% endblock base %}

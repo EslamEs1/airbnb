@@ -17,12 +17,9 @@
           <div class="ftco-footer-widget mb-4 ml-md-5">
             <h2 class="ftco-heading-2">Information</h2>
             <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">About</a></li>
-              <li><a href="#" class="py-2 d-block">Service</a></li>
-              <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-              <li><a href="#" class="py-2 d-block">Become a partner</a></li>
-              <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-              <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+              <li><a href="{% url 'about:about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'property:property_list' %}" class="py-2 d-block">Hotels</a></li>
+              <li><a href="{% url 'blog:article' %}" class="py-2 d-block">Blog</a></li>
             </ul>
           </div>
         </div>
@@ -30,11 +27,8 @@
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">Customer Support</h2>
             <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">FAQ</a></li>
-              <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-              <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-              <li><a href="#" class="py-2 d-block">How it works</a></li>
-              <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+              <li><a href="{% url 'about:about' %}" class="py-2 d-block">FAQ</a></li>
+              <li><a href="{% url 'main:contact' %}" class="py-2 d-block">Contact Us</a></li>
             </ul>
           </div>
         </div>
@@ -59,7 +53,7 @@
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>
               document.write(new Date().getFullYear());
-            </script> All rights reserved | This BackEnd is made <i class="icon-heart" aria-hidden="true"></i> by
+            </script> All rights reserved | BackEnd is made <i class="icon-heart" aria-hidden="true"></i> by
             <a href="https://www.facebook.com/mnmm403" target="_blank">EslamEs</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           </p>

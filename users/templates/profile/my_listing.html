@@ -15,66 +15,70 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 
 
 
-	<section class="ftco-section ftco-degree-bg">
-		<div class="container">
-			<div class="row">
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
 
-				<div class="col-lg-9">
-					<div class="row">
-						{% for property in user_listing %}
-						<div class="col-md-4 ftco-animate">
-							<div class="destination">
-								<a href="{{property.get_absolute_url}}"
-									class="img img-2 d-flex justify-content-center align-items-center"
-									style="background-image: url({{property.image.url}});">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<div class="d-flex">
-										<div class="one">
-											<h3><a href="{{property.get_absolute_url}}">{{property}}</a></h3>
-											<p class="rate">
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star-o"></i>
-												<span>8 Rating</span>
-											</p>
-										</div>
-										<div class="two">
-											<span
-												class="price per-price">${{property.price}}<br><small>/night</small></span>
-										</div>
-									</div>
-									<p>{{property.description|truncatewords_html:10|safe}}</p>
-									<hr>
-									<p class="bottom-area d-flex">
-										<span><i class="icon-map-o"></i> {{property.place}}</span>
-										<span class="ml-auto"><a href="#">Remove</a></span>
-										
-									</p>
+			<div class="col-lg-9">
+				<div class="row">
+					{% for property in user_listing %}
+					<div class="col-md-4 ftco-animate">
+						<div class="destination">
+							<a href="{{property.get_absolute_url}}"
+								class="img img-2 d-flex justify-content-center align-items-center"
+								style="background-image: url({{property.image.url}});">
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="icon-search2"></span>
 								</div>
-							</div>
+							</a>
+							<div class="text p-3">
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="{{property.get_absolute_url}}">{{property}}</a></h3>
+										<p class="rate">
+											<i
+												class="icon-star{% if property.check_rating >= 1 %}{% else %}-o{% endif %}"></i>
+											<i
+												class="icon-star{% if property.check_rating >= 2 %}{% else %}-o{% endif %}"></i>
+											<i
+												class="icon-star{% if property.check_rating >= 3 %}{% else %}-o{% endif %}"></i>
+											<i
+												class="icon-star{% if property.check_rating >= 4 %}{% else %}-o{% endif %}"></i>
+											<i
+												class="icon-star{% if property.check_rating >= 5 %}{% else %}-o{% endif %}"></i>
+											<span>{{property.check_rating}}</span>
+										</p>
+									</div>
+									<div class="two">
+										<span
+											class="price per-price">${{property.price}}<br><small>/night</small></span>
+									</div>
+								</div>
+								<p>{{property.description|truncatewords_html:10|safe}}</p>
+								<hr>
+								<p class="bottom-area d-flex">
+									<span><i class="icon-map-o"></i> {{property.place}}</span>
+									<span class="ml-auto"><a href="#">Remove</a></span>
 
+								</p>
+							</div>
 						</div>
-						{% empty %}
-						<h2> not available now ...</h2>
-						{% endfor %}
 
 					</div>
+					{% empty %}
+					<h2> not available now ...</h2>
+					{% endfor %}
+
+				</div>
 
 
-				</div> <!-- .col-md-8 -->
-			</div>
+			</div> <!-- .col-md-8 -->
 		</div>
-	</section> <!-- .section -->
+	</div>
+</section> <!-- .section -->
 
-
-	{% endblock base %}
+{% endblock base %}

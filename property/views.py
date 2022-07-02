@@ -1,8 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.views.generic import DetailView ,CreateView
-from .models import Property, PropertyImage
-from .forms import PropertyFilter,PropertyBookForm
+from .models import Property, PropertyImage, PropertyReview
+from .forms import PropertyFilter, PropertyBookForm
 from django.views.generic.edit import FormMixin
 from django.contrib import messages
 from django_filters.views import FilterView
@@ -39,6 +40,20 @@ class PropertyDetail(FormMixin,DetailView):
             messages.success(request, 'Your Reservation Confirmed ')
             return redirect(reverse('property:property_detail' , kwargs={'slug':self.get_object().slug}))
 
+
+
+def property_review(request, slug):
+    pro = Property.objects.get(slug=slug)
+    q =request.GET.get('star')
+    if q:
+        if PropertyReview.objects.filter(property=pro, user=request.user).exists():
+            messages.error(request, 'You have already reviewed this property')
+            return redirect(reverse('property:property_detail', kwargs={'slug': slug}))
+        else:
+            review = PropertyReview.objects.create(
+                property=pro, user=request.user, rating=q)
+            return redirect(reverse('property:property_detail', kwargs={'slug': slug}))
+    
 
 
 class AddListing(CreateView):

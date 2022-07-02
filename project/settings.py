@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*79+*28&gsq)bk^o##v!b_xfut(4ms9@1vs#4if3xd)yij4%!_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eslames.pythonanywhere.com']
 
 
 # Application definition
@@ -168,8 +168,16 @@ SUMMERNOTE_CONFIG = {
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
-# SERVER_EMAIL = 'abc@domain.com'
 EMAIL_HOST_USER = 'mekky.web22@gmail.com'
-EMAIL_HOST_PASSWORD = 'Sda49fs4Zs4'
+EMAIL_HOST_PASSWORD = 'mmyuzvybnceklkfy'
 EMAIL_USE_TLS = True
 EMAIL_PORT = '587'
+
+
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Africa/Nairobi'

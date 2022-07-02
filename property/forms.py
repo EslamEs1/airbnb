@@ -1,5 +1,5 @@
 from django import forms
-from .models import Property,PropertyBook
+from .models import Property, PropertyBook, PropertyReview
 import django_filters
 
 class PropertyFilter(django_filters.FilterSet):
@@ -20,3 +20,5 @@ class PropertyBookForm(forms.ModelForm):
     class Meta:
         model = PropertyBook
         fields = ['start_date','end_date','guest','children']
+
+

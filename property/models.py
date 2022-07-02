@@ -101,7 +101,6 @@ class Category (models.Model):
 class PropertyReview(models.Model):
     user = models.ForeignKey(User, related_name='user_reviews', on_delete=models.CASCADE)
     property = models.ForeignKey(Property, related_name='property_reviews', on_delete=models.CASCADE)
-    review = models.TextField(max_length=500, verbose_name='Text')
     rating = models.IntegerField(default=0, verbose_name='Rating', validators=[MinValueValidator(1), MaxValueValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     
