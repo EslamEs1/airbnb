@@ -131,11 +131,11 @@ class PropertyBook (models.Model):
     class Meta :
         ordering = ['-id']
 
+    def __str__(self):
+        return str(self.property)
+        
     def in_progress(self):
         now = timezone.now().date()
         return now > self.start_date and now < self.end_date
-
+        
     in_progress.boolean = True
-
-    def __str__(self):
-        return str(self.property)

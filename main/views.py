@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
-    property_list = Property.objects.all()[0:10]
+    property_list = Property.objects.all()[0:5]
     restaurants_list = Property.objects.filter(
         category__title='Restaurants')[0:4]
     popular_list = Property.objects.filter(

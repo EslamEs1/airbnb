@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-*79+*28&gsq)bk^o##v!b_xfut(4ms9@1vs#4if3xd)yij4%!_
 DEBUG = False
 
 ALLOWED_HOSTS = ['eslames.pythonanywhere.com']
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -134,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Cairo'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
